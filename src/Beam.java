@@ -1,7 +1,9 @@
 public class Beam {
 
     private int row;
+    private int rowF;
     private int col;
+    private int colF;
     private int id;
     private char direction;
     private int length;
@@ -29,5 +31,19 @@ public class Beam {
     }
     public int getId(){
         return id;
+    }
+
+    public void setRowF(int rowF){
+        this.rowF = rowF;
+    }
+    public void setColF(int colF){
+        this.colF = colF;
+    }
+
+    public int getRowF(){
+        return rowF;
+    }
+    public int getColF(){
+        return colF;
     }
 }
