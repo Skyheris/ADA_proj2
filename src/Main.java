@@ -1,3 +1,8 @@
+/**
+ * @Author Francisco Oliveira (67711) & Sérgio Garrido (67202) - P4
+ */
+
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
