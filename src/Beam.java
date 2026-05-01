@@ -1,27 +1,31 @@
 public class Beam {
 
-    private int row;
-    private int rowF;
-    private int col;
-    private int colF;
+    private int ogRow;
+    private int ogCol;
     private int id;
     private char direction;
     private int length;
+    private int minRow;
+    private int minCol;
+    private int maxRow;
+    private int maxCol;
 
     public Beam(int id, int row, int col, int length, char direction){
         this.id = id;
-        this.row = row;
-        this.col = col;
+        this.ogRow = row;
+        this.ogCol = col;
         this.length = length;
         this.direction = direction;
-
     }
 
-    public int getRow(){
-        return row;
+    public int getId(){
+        return id;
     }
-    public int getCol(){
-        return col;
+    public int getOgRow(){
+        return ogRow;
+    }
+    public int getOgCol(){
+        return ogCol;
     }
     public char getDirection(){
         return direction;
@@ -29,21 +33,22 @@ public class Beam {
     public int getLength(){
         return length;
     }
-    public int getId(){
-        return id;
-    }
 
-    public void setRowF(int rowF){
-        this.rowF = rowF;
-    }
-    public void setColF(int colF){
-        this.colF = colF;
-    }
+    public int getMinRow(){ return this.minRow;}
+    public int getMaxRow(){ return this.maxRow;}
+    public int getMinCol(){ return this.minCol;}
+    public int getMaxCol(){ return this.maxCol;}
 
-    public int getRowF(){
-        return rowF;
+    public void setMinRow(int r){
+        this.minRow = r;
     }
-    public int getColF(){
-        return colF;
+    public void setMinCol(int c){
+        this.minCol = c;
+    }
+    public void setMaxRow(int r){
+        this.maxRow = r;
+    }
+    public void setMaxCol(int c){
+        this.maxCol = c;
     }
 }

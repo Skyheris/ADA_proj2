@@ -88,7 +88,7 @@ public class Main {
         List<Integer> chosenBeams = new LinkedList<>();
         int endColumn = startColumn + chosenColumns;
         for(Beam b: beams){
-            if (b.getCol() >= startColumn && b.getCol() <= endColumn){
+            if (b.getOgCol() >= startColumn && b.getOgCol() <= endColumn){
                 chosenBeams.add(b.getId());
             }
         }
@@ -115,31 +115,45 @@ public class Main {
         }
     }
 
-    private static boolean hasIntersection(Beam b1, Beam b2){
-        return switch (b1.getDirection()){
-            case 'N' -> b1.getRow() > b2.getRow() && ( b1.getCol() < b2.getCol() && b1.getCol() > b2.getColF() ||
-                    b1.getCol() > b2.getCol() && b1.getCol() < b2.getColF() || b1.getCol() == b2.getCol());
-            case 'S' -> b1.getRow() < b2.getRow() && ( b1.getCol() < b2.getCol() && b1.getCol() > b2.getColF() ||
-                    b1.getCol() > b2.getCol() && b1.getCol() < b2.getColF() || b1.getCol() == b2.getCol());
-            case 'E' -> b1.getCol() < b2.getCol() && (b1.getRow() > b2.getRow() && b1.getRow() < b2.getRowF() ||
-                    b1.getRow() < b2.getRow() && b1.getRow() > b2.getRowF() || b1.getRow() == b2.getRow());
-            case 'W' -> b1.getCol() > b2.getCol() && (b1.getRow() > b2.getRow() && b1.getRow() < b2.getRowF() ||
-                    b1.getRow() < b2.getRow() && b1.getRow() > b2.getRowF() || b1.getRow() == b2.getRow());
+    private static boolean hasIntersection(Beam a, Beam b){
+        return switch (a.getDirection()){
+            case 'N' -> a.getOgCol() >= b.getMinCol() && a.getOgCol() <= b.getMaxCol() && a.getOgRow() > b.getMaxRow();
+            case 'S' -> a.getOgCol() >= b.getMinCol() && a.getOgCol() <= b.getMaxCol() && a.getOgRow() < b.getMinRow();
+            case 'E' -> a.getOgRow() >= b.getMinRow() && a.getOgRow() <= b.getMaxRow() && a.getOgCol() < b.getMinCol();
+            case 'W' -> a.getOgRow() >= b.getMinRow() && a.getOgRow() <= b.getMaxRow() && a.getOgCol() > b.getMaxCol();
             default -> false;
         };
     }
 
     private static void calcFinalCords(Beam b){
-        b.setRowF(b.getRow());
-        b.setColF(b.getCol());
-        int xi = b.getCol();
-        int yi = b.getRow();
+        int xi = b.getOgCol();
+        int yi = b.getOgRow();
         int l = b.getLength();
         switch(b.getDirection()){
-            case 'N' -> b.setRowF(yi - l);
-            case 'S' -> b.setRowF(yi + l);
-            case 'E' -> b.setColF(xi + l);
-            case 'W' -> b.setColF(xi - l);
+            case 'N' ->{
+                b.setMaxRow(yi);
+                b.setMinRow(yi - l + 1);
+                b.setMinCol(xi);
+                b.setMaxCol(xi);
+            }
+            case 'S' -> {
+                b.setMinRow(yi);
+                b.setMaxRow(yi + l - 1);
+                b.setMinCol(xi);
+                b.setMaxCol(xi);
+            }
+            case 'E' -> {
+                b.setMinCol(xi);
+                b.setMaxCol(xi + l - 1);
+                b.setMinRow(yi);
+                b.setMaxRow(yi);
+            }
+            case 'W' -> {
+                b.setMinCol(xi - l + 1);
+                b.setMaxCol(xi);
+                b.setMinRow(yi);
+                b.setMaxRow(yi);
+            }
         }
     }
 }
