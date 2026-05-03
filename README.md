@@ -6,7 +6,7 @@ Autores: Francisco Oliveira (67711) & Sérgio Garrido (67202) - P4
 
 🚀 O Problema
 
-Numa grelha de runas de tamanho máximo $200 \times 200$, existem até $10.000$ feixes mágicos.
+Numa grelha de runas de tamanho máximo $200 \times 200$, existem até 10.000 feixes mágicos.
 O objetivo é limpar um conjunto de colunas específicas (o "Corredor de Estabilização"). Os feixes movem-se apenas numa direção (Norte, Sul, Este ou Oeste) e não podem sobrepor-se.
 Temos de determinar:
 
@@ -22,11 +22,11 @@ A solução inicial lidava com a deteção de bloqueios comparando cada feixe co
 
 O código foi refatorado e otimizado com as seguintes abordagens:
 
-1. Grelha de Ocupação e Ray-Casting (Fim do $O(B^2)$)
+1. Grelha de Ocupação e Ray-Casting (Fim do O(B^2))
 
 Em vez de comparações par-a-par, introduzimos uma matriz de ocupação (Occupancy Grid).
 
-Mapeamos o estado inicial de todos os feixes numa matriz de $200 \times 200$.
+Mapeamos o estado inicial de todos os feixes numa matriz de 200 * 200.
 
 Implementamos um algoritmo de Ray-Casting (traceBeamPath): cada feixe "dispara" um raio na sua direção de movimento para ver em que identificadores bate.
 
@@ -51,7 +51,5 @@ Se no final o número de feixes processados for inferior ao total de feixes nece
 4. Estruturas de Dados Modernas e Fast I/O
 
 Uso de Java Records (BeamCoordinates, BeamBoundary) para garantir a imutabilidade, baixo consumo de memória e código limpo.
-
-Leitura de dados otimizada e blindada com expressões regulares (split("\\s+")).
 
 Substituição de múltiplos System.out.print por um StringBuilder centralizado, evitando overhead massivo de Input/Output no terminal.
