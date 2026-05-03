@@ -1,24 +1,22 @@
+import beamutils.BeamBoundary;
+import beamutils.BeamCoordinates;
+
 /**
  * @Author Francisco Oliveira (67711) & Sérgio Garrido (67202) - P4
  */
 
 public class Beam {
     private int id;
-    private int ogRow;
-    private int ogCol;
+    private BeamCoordinates coordinates;
     private char direction;
     private int length;
 
     // Boundaries
-    private int minRow;
-    private int minCol;
-    private int maxRow;
-    private int maxCol;
+    private BeamBoundary beamBoundaries;
 
     public Beam(int id, int row, int col, int length, char direction){
         this.id = id;
-        this.ogRow = row;
-        this.ogCol = col;
+        this.coordinates = new BeamCoordinates(col, row);
         this.length = length;
         this.direction = direction;
     }
@@ -27,11 +25,11 @@ public class Beam {
     public int getId(){
         return id;
     }
-    public int getOgRow(){
-        return ogRow;
+    public int getSrcRow(){
+        return coordinates.row();
     }
-    public int getOgCol(){
-        return ogCol;
+    public int getSrcCol(){
+        return coordinates.col();
     }
     public char getDirection(){
         return direction;
@@ -40,22 +38,13 @@ public class Beam {
         return length;
     }
 
+    public void setBoundaries(int minRow, int maxRow, int minCol, int maxCol){
+        this.beamBoundaries = new BeamBoundary(minRow, maxRow, minCol, maxCol);
+    }
     // Boundary settings
-    public int getMinRow(){ return this.minRow;}
-    public int getMaxRow(){ return this.maxRow;}
-    public int getMinCol(){ return this.minCol;}
-    public int getMaxCol(){ return this.maxCol;}
+    public int getMinRow(){ return this.beamBoundaries.minRow();}
+    public int getMaxRow(){ return this.beamBoundaries.maxRow();}
+    public int getMinCol(){ return this.beamBoundaries.minCol();}
+    public int getMaxCol(){ return this.beamBoundaries.maxCol();}
 
-    public void setMinRow(int r){
-        this.minRow = r;
-    }
-    public void setMinCol(int c){
-        this.minCol = c;
-    }
-    public void setMaxRow(int r){
-        this.maxRow = r;
-    }
-    public void setMaxCol(int c){
-        this.maxCol = c;
-    }
 }
