@@ -253,7 +253,7 @@ public class Solver {
     }
 
     /**
-     * Calculares the boundaries of a beam
+     * Calculates the boundaries of a beam
      * @param b - The beam
      */
     private void calcBeamBoundaries(Beam b) {
